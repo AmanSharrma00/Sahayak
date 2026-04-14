@@ -17,7 +17,7 @@ export default function App() {
       <Providers>
         <div className="bg-gray-50 min-h-screen flex flex-col font-sans antialiased">
           <Navbar />
-          <main className="flex-grow">
+          <main className="grow">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
