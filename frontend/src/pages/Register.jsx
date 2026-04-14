@@ -1,13 +1,12 @@
-'use client';
+
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User as UserIcon, ArrowRight, Store } from 'lucide-react';
-import api from '../../services/api';
+import api from '../services/api';
 
 export default function Register() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,7 +23,7 @@ export default function Register() {
 
     try {
       await api.post('/auth/signup', formData);
-      router.push('/login?registered=true');
+      navigate('/login?registered=true');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
@@ -55,7 +54,7 @@ export default function Register() {
             <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Create your account</h2>
             <p className="mt-2 text-sm text-gray-600">
               Already have an account?{' '}
-              <Link href="/login" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+              <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
                 Sign in instead
               </Link>
             </p>

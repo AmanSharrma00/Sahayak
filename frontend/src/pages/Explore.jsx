@@ -1,11 +1,10 @@
-'use client';
+
 
 import { useQuery } from '@tanstack/react-query';
-import api from '../../services/api';
+import api from '../services/api';
 import { ShoppingCart, Star, Filter, PackageOpen, Grid } from 'lucide-react';
-import Link from 'next/link';
-import { useAuthStore } from '../../store/authStore';
-import { useSearchParams } from 'next/navigation';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useAuthStore } from '../store/authStore';
 
 // Function to fetch products from backend
 const fetchProducts = async (category) => {
@@ -22,7 +21,7 @@ const fetchCategories = async () => {
 
 export default function ExplorePage() {
   const { isAuthenticated } = useAuthStore();
-  const searchParams = useSearchParams();
+  const [searchParams] = useSearchParams();
   const selectedCategory = searchParams.get('category'); // e.g. "64ad......."
 
   // Query Products
@@ -63,7 +62,7 @@ export default function ExplorePage() {
             </div>
             
             <div className="space-y-3">
-              <Link href="/explore">
+              <Link to="/explore">
                 <div className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${!selectedCategory ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:bg-gray-50'}`}>
                   <Grid size={16} /> All Products
                 </div>
@@ -74,7 +73,7 @@ export default function ExplorePage() {
                   {[1,2,3,4].map(i => <div key={i} className="h-8 bg-gray-100 rounded animate-pulse"></div>)}
                 </div>
               ) : categories && categories.map((cat) => (
-                <Link key={cat._id} href={`/explore?category=${cat._id}`}>
+                <Link key={cat._id} to={`/explore?category=${cat._id}`}>
                   <div className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${selectedCategory === cat._id ? 'bg-indigo-50 text-indigo-700' : 'text-gray-600 hover:bg-gray-50 hover:text-indigo-600'}`}>
                     <span>{cat.name}</span>
                   </div>
@@ -140,7 +139,7 @@ export default function ExplorePage() {
                     {/* Add to Cart Overlay */}
                     {isAuthenticated && (
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                        <Link href={`/product/${product._id}`} className="bg-white text-indigo-900 font-bold px-6 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 hover:bg-indigo-50 hover:text-indigo-700">
+                        <Link to={`/product/${product._id}`} className="bg-white text-indigo-900 font-bold px-6 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2 hover:bg-indigo-50 hover:text-indigo-700">
                           <ShoppingCart size={18} /> View Details
                         </Link>
                       </div>
@@ -166,7 +165,7 @@ export default function ExplorePage() {
                           <span className="text-gray-600 text-xs ml-1 font-medium">{product.ratings || 'New'}</span>
                         </div>
                       </div>
-                      <Link href={`/product/${product._id}`}>
+                      <Link to={`/product/${product._id}`}>
                         <h3 className="font-bold text-lg text-gray-900 mb-1 leading-tight hover:text-indigo-600 transition-colors line-clamp-2">
                           {product.title}
                         </h3>
@@ -192,7 +191,7 @@ export default function ExplorePage() {
               <PackageOpen size={64} className="text-gray-300 mb-4" />
               <h3 className="text-2xl font-bold text-gray-800 mb-2">No Products in this Category</h3>
               <p className="text-gray-500 font-medium max-w-md">Try selecting another category or check back later.</p>
-              <Link href="/explore" className="mt-6 font-bold text-indigo-600 hover:text-indigo-500">
+              <Link to="/explore" className="mt-6 font-bold text-indigo-600 hover:text-indigo-500">
                 Clear Filters
               </Link>
             </div>

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingBag, ShieldCheck, Truck } from 'lucide-react';
 
 export default function Home() {
@@ -15,11 +15,11 @@ export default function Home() {
               Discover millions of products from independent sellers across India. Start your business journey or shop securely with Sahayak today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/explore" className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-indigo-600 rounded-full overflow-hidden transition-all duration-300 shadow-xl shadow-indigo-200 hover:shadow-indigo-300 hover:bg-indigo-500 hover:scale-105 hover:-translate-y-1 w-full sm:w-auto">
+              <Link to="/explore" className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-indigo-600 rounded-full overflow-hidden transition-all duration-300 shadow-xl shadow-indigo-200 hover:shadow-indigo-300 hover:bg-indigo-500 hover:scale-105 hover:-translate-y-1 w-full sm:w-auto">
                 Start Shopping
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/seller/register" className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-indigo-600 bg-white border-2 border-indigo-100 rounded-full overflow-hidden transition-all duration-300 hover:border-indigo-200 hover:bg-indigo-50 w-full sm:w-auto">
+              <Link to="/seller/register" className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-indigo-600 bg-white border-2 border-indigo-100 rounded-full overflow-hidden transition-all duration-300 hover:border-indigo-200 hover:bg-indigo-50 w-full sm:w-auto">
                 Become a Seller
               </Link>
             </div>

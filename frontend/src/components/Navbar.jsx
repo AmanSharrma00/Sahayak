@@ -1,6 +1,6 @@
-'use client';
 
-import Link from 'next/link';
+
+import { Link } from 'react-router-dom';
 import { ShoppingCart, User, Menu, Search, Compass, LogOut } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import { useState } from 'react';
@@ -19,7 +19,7 @@ export default function Navbar() {
             <div className="h-8 w-8 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-lg flex items-center justify-center transform transition-transform group-hover:rotate-12">
               <span className="text-white font-bold text-xl leading-none">S</span>
             </div>
-            <Link href="/" className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 tracking-tighter">
+            <Link to="/" className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 tracking-tighter">
               Sahayak
             </Link>
           </div>
@@ -38,13 +38,13 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/explore" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors flex items-center gap-1">
+            <Link to="/explore" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors flex items-center gap-1">
               <Compass size={18} /> Explore
             </Link>
             
             {isAuthenticated ? (
               <>
-                <Link href="/cart" className="text-gray-600 hover:text-indigo-600 transition-colors relative group">
+                <Link to="/cart" className="text-gray-600 hover:text-indigo-600 transition-colors relative group">
                   <ShoppingCart size={22} className="transform group-hover:scale-110 transition-transform"/>
                   <span className="absolute -top-2 -right-2 bg-indigo-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-sm">
                     0
@@ -62,8 +62,8 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex items-center space-x-4 pl-4 border-l border-gray-200">
-                <Link href="/login" className="text-gray-600 font-medium hover:text-indigo-600 transition-colors">Login</Link>
-                <Link href="/register" className="bg-gray-900 hover:bg-indigo-600 text-white px-5 py-2 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-indigo-500/30">
+                <Link to="/login" className="text-gray-600 font-medium hover:text-indigo-600 transition-colors">Login</Link>
+                <Link to="/register" className="bg-gray-900 hover:bg-indigo-600 text-white px-5 py-2 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-indigo-500/30">
                   Sign Up
                 </Link>
               </div>

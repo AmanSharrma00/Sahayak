@@ -1,18 +1,15 @@
-'use client';
+
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import api from '../../../services/api';
+import api from '../services/api';
 import { ShoppingCart, Star, ShieldCheck, Check, Truck, AlertCircle, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { useAuthStore } from '../../../store/authStore';
-import { useRouter } from 'next/navigation';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useAuthStore } from '../store/authStore';
 
-export default function ProductDetailPage({ params }) {
-  const unwrappedParams = params; // Depending on NextJS config, params might be a Promise in Next 15, but since we are on 14 it's sync. In 15 we'd React.use(params). We assume ^14 for now based on standard creation. 
-  // Wait, Next 15 requires React.use(params). Let's use standard approach that works
-  const { id } = unwrappedParams;
-  const router = useRouter();
+export default function ProductDetailPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { isAuthenticated } = useAuthStore();
   const [quantity, setQuantity] = useState(1);
   const [addStatus, setAddStatus] = useState({ loading: false, success: false, error: null });
@@ -28,7 +25,7 @@ export default function ProductDetailPage({ params }) {
 
   const handleAddToCart = async () => {
     if (!isAuthenticated) {
-      router.push('/login');
+      navigate('/login');
       return;
     }
 
@@ -63,7 +60,7 @@ export default function ProductDetailPage({ params }) {
       <AlertCircle className="text-red-500 w-16 h-16 mb-4" />
       <h2 className="text-2xl font-bold text-gray-900 mb-2">Product Not Found</h2>
       <p className="text-gray-500 mb-6">The item you are looking for does not exist or has been removed.</p>
-      <Link href="/explore" className="text-indigo-600 font-bold hover:underline flex items-center gap-2">
+      <Link to="/explore" className="text-indigo-600 font-bold hover:underline flex items-center gap-2">
         <ArrowLeft size={18} /> Back to Explore
       </Link>
     </div>
@@ -72,7 +69,7 @@ export default function ProductDetailPage({ params }) {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <Link href="/explore" className="text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors flex items-center gap-2 mb-8 w-max">
+        <Link to="/explore" className="text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors flex items-center gap-2 mb-8 w-max">
           <ArrowLeft size={16} /> Back to Catalog
         </Link>
         

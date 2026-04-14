@@ -1,15 +1,14 @@
-'use client';
+
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Mail, Lock, ArrowRight, CheckCircle2 } from 'lucide-react';
-import api from '../../services/api';
-import { useAuthStore } from '../../store/authStore';
+import api from '../services/api';
+import { useAuthStore } from '../store/authStore';
 
 export default function Login() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const isRegistered = searchParams.get('registered') === 'true';
   const login = useAuthStore((state) => state.login);
 
@@ -36,9 +35,9 @@ export default function Login() {
       login({ id: payload.id, role: payload.role }, token);
       
       // Push based on role context
-      if (payload.role === 'admin') router.push('/admin');
-      else if (payload.role === 'vendor') router.push('/vendor');
-      else router.push('/');
+      if (payload.role === 'admin') navigate('/admin');
+      else if (payload.role === 'vendor') navigate('/vendor');
+      else navigate('/');
       
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
@@ -62,7 +61,7 @@ export default function Login() {
           <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Welcome back</h2>
           <p className="mt-2 text-sm text-gray-500">
             Don't have an account?{' '}
-            <Link href="/register" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+            <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
               Sign up for free
             </Link>
           </p>

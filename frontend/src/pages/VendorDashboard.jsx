@@ -1,16 +1,16 @@
-'use client';
+
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import api from '../../services/api';
-import { useAuthStore } from '../../store/authStore';
-import { useRouter } from 'next/navigation';
-import { Store, Package, Image as ImageIcon, UploadCloud, Truck, FileList, AlertCircle, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import api from '../services/api';
+import { useAuthStore } from '../store/authStore';
+import { useNavigate } from 'react-router-dom';
+import { Store, Package, Image as ImageIcon, UploadCloud, Truck, AlertCircle, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function VendorDashboard() {
   const { isAuthenticated, user } = useAuthStore();
-  const router = useRouter();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('orders'); // 'orders' | 'upload'
   
   // Form State
@@ -27,7 +27,7 @@ export default function VendorDashboard() {
         <AlertCircle className="w-20 h-20 text-red-500 mb-6" />
         <h2 className="text-3xl font-extrabold text-gray-900 mb-3">Access Denied</h2>
         <p className="text-gray-500 mb-8 max-w-md">You must be logged in as a <b>Vendor</b> to access the seller dashboard.</p>
-        <Link href="/login" className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-indigo-600 transition-colors">
+        <Link to="/login" className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-indigo-600 transition-colors">
           Switch Account
         </Link>
       </div>

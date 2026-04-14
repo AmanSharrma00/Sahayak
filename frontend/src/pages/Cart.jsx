@@ -1,11 +1,11 @@
-'use client';
+
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import api from '../../services/api';
-import { useAuthStore } from '../../store/authStore';
+import api from '../services/api';
+import { useAuthStore } from '../store/authStore';
 import { Trash2, ShoppingBag, ArrowRight, ShieldCheck, Plus, Minus, CreditCard } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 // Helper to inject Razorpay JS script
 const loadRazorpayScript = () => {
@@ -142,7 +142,7 @@ export default function CartPage() {
       <ShoppingBag className="w-20 h-20 text-gray-300 mb-6" />
       <h2 className="text-3xl font-extrabold text-gray-900 mb-3 tracking-tight">Your cart is waiting</h2>
       <p className="text-gray-500 mb-8 max-w-md text-center">Login to your account to view your cart and proceed to checkout.</p>
-      <Link href="/login" className="bg-indigo-600 text-white px-8 py-3.5 rounded-full font-bold shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
+      <Link to="/login" className="bg-indigo-600 text-white px-8 py-3.5 rounded-full font-bold shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
         Login Now
       </Link>
     </div>
@@ -170,7 +170,7 @@ export default function CartPage() {
                 <ShoppingBag size={64} className="text-gray-200 mb-4" />
                 <h3 className="text-2xl font-bold text-gray-800 mb-2">Your cart is empty</h3>
                 <p className="text-gray-500 mb-8">Looks like you haven't added anything yet.</p>
-                <Link href="/explore" className="text-indigo-600 font-bold bg-indigo-50 px-6 py-3 rounded-full hover:bg-indigo-100 transition-colors">
+                <Link to="/explore" className="text-indigo-600 font-bold bg-indigo-50 px-6 py-3 rounded-full hover:bg-indigo-100 transition-colors">
                   Continue Shopping
                 </Link>
               </div>
@@ -186,7 +186,7 @@ export default function CartPage() {
                   </div>
                   
                   <div className="flex-1 text-center sm:text-left w-full">
-                    <Link href={`/product/${item.product._id}`}>
+                    <Link to={`/product/${item.product._id}`}>
                       <h3 className="text-lg font-bold text-gray-900 group-hover:text-indigo-600 transition-colors mb-1 line-clamp-1">{item.product.title}</h3>
                     </Link>
                     <p className="text-2xl font-black text-gray-900 mb-4">₹{item.price}</p>
