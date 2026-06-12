@@ -3,7 +3,29 @@
 Sahayak is a premium, state-of-the-art multi-vendor e-commerce marketplace platform designed to empower independent sellers and provide a seamless shopping experience for customers. Built on a modern, robust MERN architecture (Vite, Express, Node.js, and MongoDB), Sahayak features secure checkout powered by Razorpay, automated product caching, Cloudinary image streaming, and interactive dashboards.
 
 ---
+## 📸 Screenshots
 
+
+![Signup Page](Screenshots/signup.png)
+
+### Login Page
+
+![Login Page](Screenshots/login.png)
+
+### Product Details Page
+
+![Product Details](Screenshots/product.png)
+
+### Shopping Cart
+
+![Shopping Cart](Screenshots/cart.png)
+
+---
+
+## 🚀 Key Features
+
+### 🛒 Customer Experience
+...
 ## 🚀 Key Features
 
 ### 🛒 Customer Experience
