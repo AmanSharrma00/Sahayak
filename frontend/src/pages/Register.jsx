@@ -32,7 +32,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex bg-gray-50">
+    <div className="min-h-[calc(100vh-4rem)] flex bg-gray-50 dark:bg-slate-950">
       {/* Left Banner */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 to-violet-800 p-12 text-white flex-col justify-between relative overflow-hidden">
         <div className="relative z-10">
@@ -51,10 +51,10 @@ export default function Register() {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Create your account</h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Create your account</h2>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Already have an account?{' '}
-              <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+              <Link to="/login" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 transition-colors">
                 Sign in instead
               </Link>
             </p>
@@ -69,7 +69,7 @@ export default function Register() {
             
             <div className="space-y-4">
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-gray-500">
                   <UserIcon size={18} />
                 </div>
                 <input
@@ -78,12 +78,12 @@ export default function Register() {
                   placeholder="Full Name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="pl-10 w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white"
+                  className="pl-10 w-full text-gray-900 dark:text-white px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white dark:bg-slate-800 dark:placeholder-gray-400"
                 />
               </div>
 
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-gray-500">
                   <Mail size={18} />
                 </div>
                 <input
@@ -92,12 +92,12 @@ export default function Register() {
                   placeholder="Email address"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="pl-10 w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white"
+                  className="pl-10 w-full text-gray-900 dark:text-white px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white dark:bg-slate-800 dark:placeholder-gray-400"
                 />
               </div>
 
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-gray-500">
                   <Lock size={18} />
                 </div>
                 <input
@@ -106,15 +106,15 @@ export default function Register() {
                   placeholder="Password"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="pl-10 w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white"
+                  className="pl-10 w-full text-gray-900 dark:text-white px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-white dark:bg-slate-800 dark:placeholder-gray-400"
                 />
               </div>
 
               <div className="pt-4 space-y-3">
-                <p className="text-sm font-medium text-gray-700">How would you like to use Sahayak?</p>
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">How would you like to use Sahayak?</p>
                 <div className="grid grid-cols-2 gap-4">
                   <label 
-                    className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center gap-2 transition-all duration-200 ${formData.role === 'customer' ? 'border-indigo-600 bg-indigo-50/50 text-indigo-700' : 'border-gray-200 hover:border-indigo-200 text-gray-500'}`}
+                    className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center gap-2 transition-all duration-200 ${formData.role === 'customer' ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'border-gray-200 dark:border-slate-700 hover:border-indigo-200 text-gray-500 dark:text-gray-400'}`}
                   >
                     <input 
                       type="radio" 
@@ -129,7 +129,7 @@ export default function Register() {
                   </label>
                   
                   <label 
-                    className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center gap-2 transition-all duration-200 ${formData.role === 'vendor' ? 'border-indigo-600 bg-indigo-50/50 text-indigo-700' : 'border-gray-200 hover:border-indigo-200 text-gray-500'}`}
+                    className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center gap-2 transition-all duration-200 ${formData.role === 'vendor' ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'border-gray-200 dark:border-slate-700 hover:border-indigo-200 text-gray-500 dark:text-gray-400'}`}
                   >
                     <input 
                       type="radio" 

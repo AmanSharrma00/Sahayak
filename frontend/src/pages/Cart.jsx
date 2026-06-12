@@ -28,15 +28,25 @@ export default function CartPage() {
       api.get('/payment/config').then(res => setRazorpayKey(res.data.keyId)).catch(console.error);
     }
   }, [isAuthenticated]);
-
+  console.log("Cart page mounted");
+  // const { data: cartData, isLoading, refetch } = useQuery({
+  //   queryKey: ['cart', 'v2'],
+  //   // queryKey: ['cart', Date.now()],
+  //   queryFn: async () => {
+  //     const { data } = await api.get('/cart');
+  //     return data.cart;
+  //   },
+  //   enabled: isAuthenticated,
+  // });
   const { data: cartData, isLoading, refetch } = useQuery({
-    queryKey: ['cart'],
-    queryFn: async () => {
-      const { data } = await api.get('/cart');
-      return data.cart;
-    },
-    enabled: isAuthenticated,
-  });
+  queryKey: ['cart', 'v2'],
+  queryFn: async () => {
+    const { data } = await api.get('/cart');
+    return data.cart;
+  },
+  enabled: isAuthenticated,
+  refetchOnMount: true
+});
 
   const handleRemove = async (productId) => {
     try {
@@ -53,14 +63,19 @@ export default function CartPage() {
     setCheckoutLoading(true);
     try {
       // 1. Create a Sahayak Order
-      const orderItems = cartData.items.map(item => ({
-        name: item.product.title,
-        quantity: item.quantity,
-        image: item.product.images?.length > 0 ? item.product.images[0].url : '',
-        price: item.price,
-        product: item.product._id,
-        vendor: item.product.vendor || '6543210' // Normally we'd populate vendor in cart
-      }));
+      const orderItems = cartData.items.map(item => {
+        if (!item.product.vendor) {
+          throw new Error(`Product ${item.product.title} is missing a vendor reference.`);
+        }
+        return {
+          name: item.product.title,
+          quantity: item.quantity,
+          image: item.product.images?.length > 0 ? item.product.images[0].url : '',
+          price: item.price,
+          product: item.product._id,
+          vendor: item.product.vendor
+        };
+      });
 
       const shippingInfo = {
         address: "123 Main St", // Dummy Data - normally collected via a form
@@ -131,7 +146,7 @@ export default function CartPage() {
 
     } catch (error) {
       console.error('Checkout error:', error);
-      alert(error.response?.data?.message || 'Error processing checkout');
+      alert(error.response?.data?.message || error.message || 'Error processing checkout');
     } finally {
       setCheckoutLoading(false);
     }

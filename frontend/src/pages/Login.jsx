@@ -16,8 +16,14 @@ export default function Login() {
     email: '',
     password: ''
   });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState('');
+  // const [loading, setLoading] = useState(false);
+const [error, setError] = useState('');
+const [loading, setLoading] = useState(false);
+
+useEffect(() => {
+  setError('');
+}, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,21 +53,21 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       
       {/* Background Orbs */}
       <div className="absolute top-20 left-20 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
       <div className="absolute bottom-20 right-20 w-72 h-72 bg-violet-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-3xl shadow-xl shadow-indigo-100/50 relative z-10 border border-gray-100">
+      <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-900 p-10 rounded-3xl shadow-xl shadow-indigo-100/50 dark:shadow-none relative z-10 border border-gray-100 dark:border-slate-800">
         <div className="text-center">
-          <div className="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 font-bold text-2xl shadow-inner border border-indigo-200">
+          <div className="h-12 w-12 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center mx-auto mb-4 font-bold text-2xl shadow-inner border border-indigo-200 dark:border-indigo-800">
             S
           </div>
-          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Welcome back</h2>
-          <p className="mt-2 text-sm text-gray-500">
+          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Welcome back</h2>
+          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
             Don't have an account?{' '}
-            <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+            <Link to="/register" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 transition-colors">
               Sign up for free
             </Link>
           </p>
@@ -86,7 +92,7 @@ export default function Login() {
 
           <div className="space-y-4">
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-gray-500">
                 <Mail size={18} />
               </div>
               <input
@@ -95,12 +101,12 @@ export default function Login() {
                 placeholder="Email address"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="pl-10 w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50/50"
+                className="pl-10 w-full text-gray-900 dark:text-white px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50/50 dark:bg-slate-800 dark:placeholder-gray-400"
               />
             </div>
 
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-gray-500">
                 <Lock size={18} />
               </div>
               <input
@@ -109,7 +115,7 @@ export default function Login() {
                 placeholder="Password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="pl-10 w-full text-gray-900 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50/50"
+                className="pl-10 w-full text-gray-900 dark:text-white px-4 py-3 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none bg-gray-50/50 dark:bg-slate-800 dark:placeholder-gray-400"
               />
             </div>
           </div>
@@ -122,7 +128,7 @@ export default function Login() {
                 type="checkbox"
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                 Remember me
               </label>
             </div>

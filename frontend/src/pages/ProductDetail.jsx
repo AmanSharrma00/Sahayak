@@ -6,11 +6,13 @@ import api from '../services/api';
 import { ShoppingCart, Star, ShieldCheck, Check, Truck, AlertCircle, ArrowLeft } from 'lucide-react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import { useCartStore } from '../store/cartStore';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthStore();
+  const { fetchCart } = useCartStore();
   const [quantity, setQuantity] = useState(1);
   const [addStatus, setAddStatus] = useState({ loading: false, success: false, error: null });
 
@@ -36,6 +38,7 @@ export default function ProductDetailPage() {
         productId: product._id,
         quantity: quantity
       });
+       await fetchCart(); // Update global cart store immediately
       setAddStatus({ loading: false, success: true, error: null });
       setTimeout(() => setAddStatus(prev => ({ ...prev, success: false })), 3000);
     } catch (err) {
