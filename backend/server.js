@@ -38,7 +38,7 @@ app.use(
 );
 
 
-app.use(helmet());
+//app.use(helmet());
 
 // Routes
 app.use("/api/auth", authRoutes);
