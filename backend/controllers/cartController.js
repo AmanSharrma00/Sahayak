@@ -6,7 +6,7 @@ const Product = require('../models/Product');
 // @access  Private
 exports.getCart = async (req, res) => {
   try {
-    let cart = await Cart.findOne({ user: req.user.id }).populate('items.product', 'title price images');
+    let cart = await Cart.findOne({ user: req.user.id }).populate('items.product', 'title price images vendor');
     
     if (!cart) {
       cart = await Cart.create({ user: req.user.id, items: [] });

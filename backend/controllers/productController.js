@@ -1,5 +1,9 @@
 const Product = require('../models/Product');
 const { uploadImageToCloudinary } = require('../utils/cloudinaryUploader');
+const NodeCache = require('node-cache');
+
+// Initialize cache with a Time-To-Live of 5 minutes (300 seconds)
+const productCache = new NodeCache({ stdTTL: 300 });
 
 // @desc    Create a new product
 // @route   POST /api/products
@@ -46,6 +50,17 @@ exports.createProduct = async (req, res) => {
 // @access  Public
 exports.getProducts = async (req, res) => {
   try {
+    // 1. Generate a unique key based on the query string
+    const cacheKey = `products_${JSON.stringify(req.query)}`;
+    
+    // 2. Check if we have a cached response for this exact query
+    const cachedResponse = productCache.get(cacheKey);
+    if (cachedResponse) {
+      console.log(`[Cache Hit] Serving products for query: ${JSON.stringify(req.query)}`);
+      return res.json(cachedResponse);
+    }
+
+    console.log(`[Cache Miss] Fetching products from database...`);
     const resPerPage = Number(req.query.limit) || 8;
     const page = Number(req.query.page) || 1;
 
@@ -77,15 +92,21 @@ exports.getProducts = async (req, res) => {
     const products = await Product.find(query)
       .populate('category', 'name slug')
       .skip(resPerPage * (page - 1))
-      .limit(resPerPage);
+      .limit(resPerPage)
+      .lean();
 
-    res.json({
+    const responseData = {
       success: true,
       count: products.length,
       productCount,
       resPerPage,
       products,
-    });
+    };
+
+    // 3. Store the fresh data in cache for next time
+    productCache.set(cacheKey, responseData);
+
+    res.json(responseData);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
